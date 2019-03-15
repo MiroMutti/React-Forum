@@ -1,48 +1,24 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import requester from '../../infrastructure/requester';
-import observer from '../../infrastructure/observer';
 
-export default class RegisterForm extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            username: null,
-            password: null
-        }
-    }
+import withFormManager from './../../hocs/formManager';
+import userModel from '../../model/userModel';
+import userServices from '../../services/userServices';
 
-    handleChange = event => {
-        this.setState({
-            [event.target.name]: event.target.value
-        })
-    }
-
-    handleSubmit = event => {
-        event.preventDefault()
-
-        requester.post('user', '', 'basic', this.state)
-            .then(res => {
-                observer.trigger(observer.events.loginUser, res.username)
-                sessionStorage.setItem('authtoken', res._kmd.authtoken)
-            })
-            .catch(error => {
-                console.log(error);
-            })
-    }
+class RegisterForm extends Component {
 
     render = () => {
         return (
             <div className="form-wrapper">
                 <h2>Login</h2>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.props.handleSubmit}>
                     <label htmlFor="Username">
                         Username
                         <input
                             type="text"
                             name="username"
                             placeholder="enter username"
-                            onChange={this.handleChange} />
+                            onChange={this.props.handleChange} />
                     </label>
                     <label htmlFor="password">
                         Password
@@ -50,7 +26,7 @@ export default class RegisterForm extends Component {
                             type="password"
                             name="password"
                             placeholder="enter password"
-                            onChange={this.handleChange} />
+                            onChange={this.props.handleChange} />
                     </label>
                     <label htmlFor="repeatPassword">
                         Repeat Password
@@ -58,7 +34,7 @@ export default class RegisterForm extends Component {
                             type="password"
                             name="repeatPassword"
                             placeholder="repeat your password"
-                            onChange={this.handleChange} />
+                            onChange={this.props.handleChange} />
                     </label>
                     <button className="button" type="submit">Register</button>
                 </form>
@@ -67,3 +43,5 @@ export default class RegisterForm extends Component {
         )
     }
 }
+
+export default withFormManager(RegisterForm, userModel, userServices.register)

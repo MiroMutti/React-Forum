@@ -23,7 +23,7 @@ function makeRequest(method, module, endpoint, auth) {
 }
 
 // Function to return GET promise
-function get(module, endpoint, auth) {
+function get(module, endpoint, auth, query) {
     return $.ajax(makeRequest('GET', module, endpoint, auth));
 }
 

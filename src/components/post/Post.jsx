@@ -10,7 +10,7 @@ export default class Post extends Component {
 
     createdBefore = () => {
         let dateIsoFormat = this.props._kmd.ect;
-        let diff = new Date - (new Date(dateIsoFormat));
+        let diff = new Date() - (new Date(dateIsoFormat));
         diff = Math.floor(diff / 60000);
         if (diff < 1) return 'less than a minute';
         if (diff < 60) return diff + ' minute' + pluralize(diff);
@@ -28,7 +28,7 @@ export default class Post extends Component {
         return (
             <article className='post'>
                 <div className='thumbnail'>
-                    <img scr={this.props.imageUrl} alt='thumbnail' />
+                    <img src={this.props.imageUrl} alt='thumbnail' />
                 </div>
                 <div className='post-content'>
                     <p>{this.props.title}</p>
