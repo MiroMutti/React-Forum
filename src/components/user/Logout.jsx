@@ -6,7 +6,11 @@ import requester from '../../infrastructure/requester';
 export default class Logout extends Component {
     logout = () => {
         requester.post('user', '_logout', 'kinvey')
-            .then(res => sessionStorage.removeItem('authtoken'))
+            .then(res => {
+                sessionStorage.removeItem('authtoken')
+                sessionStorage.removeItem('username')
+                sessionStorage.removeItem('userRoles')
+            })
     }
 
     render = () => {

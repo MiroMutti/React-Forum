@@ -18,7 +18,19 @@ class RegisterForm extends Component {
                             type="text"
                             name="username"
                             placeholder="enter username"
-                            onChange={this.props.handleChange} />
+                            minlength='5'
+                            oninvalid={userModel.validate('Enter User Name Here')}
+                            onChange={this.props.handleChange} 
+                            value={this.props.username}/>
+                    </label>
+                    <label htmlFor="email">
+                        E-mail
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="enter your email"
+                            onChange={this.props.handleChange} 
+                            value={this.props.email}/>
                     </label>
                     <label htmlFor="password">
                         Password
@@ -26,15 +38,9 @@ class RegisterForm extends Component {
                             type="password"
                             name="password"
                             placeholder="enter password"
-                            onChange={this.props.handleChange} />
-                    </label>
-                    <label htmlFor="repeatPassword">
-                        Repeat Password
-                        <input
-                            type="password"
-                            name="repeatPassword"
-                            placeholder="repeat your password"
-                            onChange={this.props.handleChange} />
+                            minlength='6'
+                            onChange={this.props.handleChange} 
+                            value={this.props.password}/>
                     </label>
                     <button className="button" type="submit">Register</button>
                 </form>

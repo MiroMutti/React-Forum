@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import '../../styles/catalogue.scss';
+
 
 function pluralize(value) {
     if (value !== 1) return 's';
@@ -31,15 +33,14 @@ export default class Post extends Component {
                     <img src={this.props.imageUrl} alt='thumbnail' />
                 </div>
                 <div className='post-content'>
-                    <p>{this.props.title}</p>
+                    <p className='post-title'>{this.props.title}</p>
                     <div className='details'>
-                        {this.createdBefore()}
+                        Posted before {this.createdBefore()}
                     </div>
                     <div className='action-bar'>
                         <ul>
-                            <li><Link to='/'>Details</Link></li>
-                            <li><Link to='/'>Edit</Link></li>
-                            <li><Link to='/'>Delete</Link></li>
+                            <li><Link to='/' className="button">Details</Link></li>
+                            <li><Link to='/' className="button">Delete</Link></li>
                         </ul>
                     </div>
                 </div>

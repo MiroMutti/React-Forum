@@ -4,12 +4,12 @@ import observer from '../infrastructure/observer';
 export default {
     login: {
         send: data => requester.post('user', 'login', 'basic', data),
-        success: function(res) {
+        success: function (res) {
             observer.trigger(observer.events.loginUser, res.username)
             sessionStorage.setItem('authtoken', res._kmd.authtoken)
             sessionStorage.setItem('username', res.username)
             sessionStorage.setItem('userRoles', res.Roles.join(','))
-            this.props.history.push('/catalogue')
+            this.props.history.push('/')
            
         },
         fail: res => {
@@ -23,12 +23,12 @@ export default {
             observer.trigger(observer.events.loginUser, res.username)
             sessionStorage.setItem('authtoken', res._kmd.authtoken)
             sessionStorage.setItem('username', res.username)
-            sessionStorage.setItem('userRoles', res.Roles.join(','))
+            sessionStorage.setItem('userId', res._id)
             this.props.history.push('/')
 
         },
         fail: res => {
-            this.setState({ username: '', email:'', password: '' })
+            this.setState({ username: '', password: '' })
         }
     }
 }
